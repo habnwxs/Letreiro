@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letreiro Motivacional</title>
     <style>
+        /* Resetando margens e preenchimentos */
         body, html {
             margin: 0;
             padding: 0;
@@ -13,25 +14,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0;
+            background-color: #f0f0f0; /* Cor de fundo */
         }
 
+        /* Container que contém o letreiro */
         #container {
-            width: 80%; /* Largura da tela */
+            width: 80%; /* Largura do container */
             height: 100px; /* Altura do letreiro */
-            overflow: hidden; /* Esconde o conteúdo fora da área do container */
-            position: relative;
-            background-color: #fff;
+            overflow: hidden; /* Esconde o conteúdo fora do container */
+            position: relative; /* Necessário para posicionar o letreiro dentro */
+            background-color: #ffffff; /* Fundo branco para o container */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra discreta no container */
+            border-radius: 10px; /* Bordas arredondadas no container */
         }
 
+        /* Estilo do letreiro */
         #letreiro {
             position: absolute;
-            white-space: nowrap;
-            font-size: 24px;
-            font-family: Arial, sans-serif;
-            color: #333;
+            white-space: nowrap; /* Evita que o texto quebre a linha */
+            font-size: 24px; /* Tamanho da fonte */
+            font-family: 'Arial', sans-serif;
+            color: #333333; /* Cor do texto */
             padding: 20px; /* Espaço livre em torno do texto */
-            text-align: center;
+            text-align: center; /* Alinha o texto ao centro */
         }
     </style>
 </head>
@@ -48,19 +53,22 @@
         const container = document.getElementById('container');
 
         let velocidade = 2; // Controla a velocidade do letreiro (quanto maior, mais rápido)
-        let textoWidth = letreiro.offsetWidth;
-        let containerWidth = container.offsetWidth;
-        let position = -textoWidth; // Inicia fora da tela (à esquerda)
+        let textoWidth = letreiro.offsetWidth; // Largura do texto
+        let containerWidth = container.offsetWidth; // Largura do container
+        let position = -textoWidth; // Posição inicial fora da tela à esquerda
+        let direction = 1; // Direção do movimento: 1 (da esquerda para a direita), -1 (da direita para a esquerda)
 
         // Função para mover o letreiro
         function moveLetreiro() {
-            // Atualiza a posição do letreiro
-            position += velocidade;
+            // Atualiza a posição com base na direção
+            position += velocidade * direction;
             letreiro.style.left = position + 'px';
 
-            // Quando o letreiro chega ao final da tela, reinicia a posição
+            // Quando o letreiro chegar à direita ou à esquerda, muda a direção
             if (position > containerWidth) {
-                position = -textoWidth;
+                direction = -1; // Mudar para a direção da esquerda para a direita
+            } else if (position < -textoWidth) {
+                direction = 1; // Mudar para a direção da direita para a esquerda
             }
 
             // Chama a função novamente para criar um loop contínuo
