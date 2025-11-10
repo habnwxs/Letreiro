@@ -1,0 +1,48 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%; /* Largura da tela */
+    height: 100px; /* Altura da tela */
+    overflow: hidden; /* Esconde o conteúdo fora do contêiner */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #000; /* Contorno ao redor do letreiro */
+    padding: 10px; /* Espaço livre ao redor do letreiro */
+    background-color: #fff;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    animation: slide 10s linear infinite;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(100%); /* Inicia fora da tela à direita */
+    }
+    50% {
+        transform: translateX(-100%); /* Passa para a esquerda */
+    }
+    100% {
+        transform: translateX(100%); /* Retorna para a direita */
+    }
+}
